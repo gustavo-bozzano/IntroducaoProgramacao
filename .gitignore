@@ -1,0 +1,20 @@
+### Java ###
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+### Folders ###
+Unidade5/Jonata
+Unidade5/Maju
+Unidade5/Felipe
+Unidade5/Martin
+
+Unidade6/Jonata
+Unidade6/Maju
+Unidade6/Felipe
+Unidade6/Martin
+Unidade6/ProvaJessica/
