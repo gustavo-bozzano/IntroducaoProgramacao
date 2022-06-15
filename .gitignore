@@ -7,6 +7,8 @@
 *.nar
 hs_err_pid*
 
+*.rar
+*.zip
 ### Folders ###
 Unidade5/Jonata
 Unidade5/Maju
