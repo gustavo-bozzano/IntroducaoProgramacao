@@ -1,46 +1,109 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Exe08 {
+    // Faça um programa que leia um valor N inteiro limitado a 20 posições. Com
+    // base
+    // neste valor, crie um vetor do tipo real. Faça o usuário informar valores
+    // para
+    // as posições deste vetor e coloque-as nas posições na sequência informada
+    // pelo
+    // usuário. Imprima uma tabela contendo cada valor diferente e o número de
+    // vezes
+    // que o valor aparece no vetor
     private Exe08() {
-        // Faça um programa que leia um valor N inteiro limitado a 20 posições. Com base
-        // neste valor, crie um vetor do tipo real. Faça o usuário informar valores para
-        // as posições deste vetor e coloque-as nas posições na sequência informada pelo
-        // usuário. Imprima uma tabela contendo cada valor diferente e o número de vezes
-        // que o valor aparece no vetor
         Scanner teclado = new Scanner(System.in);
-        int n;
-        int freq;
+
+        int tamVet;
         do {
-            System.out.println("Informe o valor N (limitado a 20)");
-            n = teclado.nextInt();
-        } while (n < 1 || n > 20);
+            System.out.print("Tamanho Vetor: ");
+            tamVet = teclado.nextInt();
+        } while ((tamVet < 1) || (tamVet > 20));
+        double vet[] = new double[tamVet];
 
-        double vetor1[] = new double[n];
+        VetLer(vet, teclado);
+        System.out.println("---");
+        VetEscrever(vet);
+        System.out.println("---");
+        VetAcharIgual_OpcaoA(vet);
+        System.out.println("---");
+        VetAcharIgual_OpcaoB(vet);
 
-        lerVetor(teclado, vetor1);
         teclado.close();
-        compara(vetor1);
-        imprimeVetor(vetor1);
     }
 
-    private void lerVetor(Scanner teclado, double vetor1[]) {
-        for (int i = 0; i < vetor1.length; i++) {
-            System.out.println("Informe numero");
-            vetor1[i] = teclado.nextDouble();
+    private void VetLer(double vet[], Scanner teclado) {
+        for (int i = 0; i < vet.length; i++) {
+            System.out.print("vet[" + i + "]: ");
+            vet[i] = teclado.nextDouble();
         }
     }
 
-    private void compara(double vetor1[]) {
-
+    private void VetEscrever(double vet[]) {
+        for (int i = 0; i < vet.length; i++) {
+            System.out.println(vet[i]);
+        }
     }
 
-    private void imprimeVetor(double vetor1[]) {
-        for (int i = 0; i < vetor1.length; i++) {
-            System.out.println(vetor1[i] + " | Frequencia: ");
+    private void VetAcharIgual_OpcaoA(double vetor[]) {
+        boolean achou[] = new boolean[vetor.length];
+        for (int i = 0; i < achou.length; i++) {
+            achou[i] = false;
+        }
+        System.out.println();
+        System.out.println("VALOR   |  FREQ��NCIA  ");
+        int contador;
+        for (int i = 0; i < vetor.length; i++) {
+            contador = 0;
+            for (int j = 0; j < vetor.length; j++) {
+                if (!achou[j]) {
+                    if (vetor[i] == vetor[j]) {
+                        achou[j] = true;
+                        contador++;
+                    }
+                }
+            }
+            if (contador > 0) {
+                System.out.println(vetor[i] + " | " + contador);
+            }
+        }
+    }
+
+    private void VetAcharIgual_OpcaoB(double vet[]) {
+        DecimalFormat df_2 = new DecimalFormat("0.00");
+        System.out.println("|  VALOR   |  FREQ��NCIA | ");
+
+        int qtd;
+        int eleLista = 0;
+        boolean pesq;
+
+        while (eleLista < vet.length) {
+            qtd = 1;
+            int pesAbaixo = 0;
+            pesq = true;
+            while (pesAbaixo < eleLista) {
+                if (vet[pesAbaixo] == vet[eleLista]) {
+                    pesq = false;
+                }
+                pesAbaixo++;
+            }
+            if (pesq) {
+                System.out.print("|  " + df_2.format(vet[eleLista]) + "    |         ");
+                int indTeste = eleLista + 1;
+                while (indTeste < vet.length) {
+                    if (vet[eleLista] == vet[indTeste]) {
+                        qtd++;
+                    }
+                    indTeste++;
+                }
+                System.out.println(qtd + "   |");
+            }
+            eleLista++;
         }
     }
 
     public static void main(String[] args) {
         new Exe08();
     }
+
 }
